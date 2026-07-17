@@ -1,5 +1,7 @@
 # Closed-Loop-Buck-Converter
 12 V → 5 V buck converter with an analog Type III compensator, designed from first principles, characterized on the bench and prototyped fully on a breadboard. Measured loop gain via Middlebrook injection: 2.9 kHz crossover, ~100° phase margin, against design targets of 10 kHz and 65°. Regulates 5.0 V across 10–14 V input and 0.5–1.0 A load at ~87% efficiency. The dominant deviations from the design are traced to measured physical causes.
+
+
 <img width="1594" height="786" alt="50mVBode" src="https://github.com/user-attachments/assets/44ff8684-95ec-4869-881a-b7d15cb99e46" />
 
 **Results**
