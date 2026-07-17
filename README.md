@@ -52,9 +52,24 @@ The oscillator was designed for 100kHz bu settles at ~71.6kHz with a hysteresis 
 Tuning the integrator's resistor produced diminishing returns
 | R_int| Hysteresis Span | Frequency | Waveform |
 | --- | --- | --- | --- |
-| 33kΩ | 100kHz | 71.6kHz | |
-| 10kΩ | 10kHz | 3.1kHz |  |
-| 4.7kΩ | ~115° | 78° |  |
+| 33kΩ | 2.2V | 40kHz | Clean triangle|
+| 10kΩ | 3.5V | 71kHz | Straight edges,rounded peaks- chose this  |
+| 4.7kΩ | 5.7V | 87kHZ | Fully sinusoidal |
+
+Each halving of R_int bought progressively less frequency while the hysteris span kept growing faster and past a point, the triangle degraded into a sinusoid. With a linear ramp the mapping of the error output to the duty cycle is proportional- a the error voltage is halfway up the ramp gives 50% duty cycle, moving the error voltage by 10% moves the duty cycle by 10%. A rounded ramp breaks that so the aggressive tuning points were rejected despite yielding a frequency closer to target. The selected value keeps rounding confined to the peaks so the converter's nominal operating point sits on the linear section of the ramp.
+
+With this circuit topology, reaching 100kHz would require a dedicated fast comparator rather than a general op-amp, which is a compoentn-level limit.
+
+###Notable Bugs
+**Inverting Schmitt trigger **
+The oscillator failed to start, with one stage latched at the rail and the other pinned to ground. The resistor arrangement produced and inverting Schmitt trigger which creates a  one-way latch- a falling triangle drives the square wave in the direction that pushes the triangle further down so the circuit never triggers its own rising transition. Rewiring the circuit to a non-inverting topology resolved this issue.
+
+**Missing compensator zero** 
+After closing the loop, the output was limit cyclced at 415mV p-p while the error amplifier swung across most of its range. One branch of the input network was removed when doing the Middlebrook injection , which collapsed the Type III to a Type II compensator, which reduced the phase margin by 45 to 90°. Installing the branch reduced the error amplifier's activity by 22x and removed the osicllation.
+
+**Two extended debugging sessions turned out to be instrumentation and not the circuit**
+
+
 
 
 
