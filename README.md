@@ -60,7 +60,7 @@ Each halving of R_int bought progressively less frequency while the hysteris spa
 
 With this circuit topology, reaching 100kHz would require a dedicated fast comparator rather than a general op-amp, which is a compoentn-level limit.
 
-###Notable Bugs
+### Notable Bugs
 **Inverting Schmitt trigger **
 The oscillator failed to start, with one stage latched at the rail and the other pinned to ground. The resistor arrangement produced and inverting Schmitt trigger which creates a  one-way latch- a falling triangle drives the square wave in the direction that pushes the triangle further down so the circuit never triggers its own rising transition. Rewiring the circuit to a non-inverting topology resolved this issue.
 
