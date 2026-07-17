@@ -6,8 +6,8 @@
 
 | Parameter| Designed Specification | Measured Value |
 | --- | --- | --- |
-| Switching Frequency | 100kHz | Row 1, Cell 3 |
-| Cutover Frequency| 10kHz | Row 2, Cell 3 |
+| Switching Frequency | 100kHz | 71.6kHz |
+| Cutover Frequency| 10kHz | 3.1kHz |
 | Phase at crossover | ~115° | 78° |
 | Phase Margin | ~65° | ~102°|
 | Line Regulation | N/A | 9.25 mV/V (0.74% over a 40% Vin swing) |
