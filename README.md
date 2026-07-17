@@ -46,4 +46,15 @@ The crossover landed at roughly a third of the target frequency. About half of t
 
 The large phase margin is caused by th elow crossover. At 3.1kHz the loop crosses below the region where the LC double poles contributes significant phase lag, while both compensator zeros have already delivered most of their phase boost. Crossing in the compensator's maximum-boost region naturally produces a large margin. This means the loop is unconditionally stable but heavily overdamped with a slower transient recovery than the 65° target, which was chosen to balance the two.
 
+**Oscillator's Frequency Limit**
+The oscillator was designed for 100kHz bu settles at ~71.6kHz with a hysteresis band nearly three times wider than intended. This was caused by the op-amp's slew rate: swinging the full supply rail takes ~3.3µs agianst a target period of 10µs, so the comparator spends a large fraction of every half-cycle mid transition. The integrator continues ramping past the ideal threshold before the transition fully registers, widening the hysteresis band.
+
+Tuning the integrator's resistor produced diminishing returns
+| R_int| Hysteresis Span | Frequency | Waveform |
+| --- | --- | --- | --- |
+| 33kΩ | 100kHz | 71.6kHz | |
+| 10kΩ | 10kHz | 3.1kHz |  |
+| 4.7kΩ | ~115° | 78° |  |
+
+
 
