@@ -41,6 +41,9 @@ One thing worth noting for reproducing this measurement: both compensator input 
 
 Raw sweeps at both 50mV and 100mV are in measurements/.
 
+**Measured Deviations from Design Specifications**
+The crossover landed at roughly a third of the target frequency. About half of that deficit is accounted for by modulator gain: the design assumes a 2.0V peak to peak triangle wave, and the oscillator as built produces 3.6V, which costs about 5.1dB for loop gain. The reduced switching frequency accounts for a further portion. The remainding gap can be attributed to component tolerances and the loop gain being lower than the idealized model predicted - this portion is not fully accounted for and is just reported as is.
 
+The large phase margin is caused by th elow crossover. At 3.1kHz the loop crosses below the region where the LC double poles contributes significant phase lag, while both compensator zeros have already delivered most of their phase boost. Crossing in the compensator's maximum-boost region naturally produces a large margin. This means the loop is unconditionally stable but heavily overdamped with a slower transient recovery than the 65° target, which was chosen to balance the two.
 
 
