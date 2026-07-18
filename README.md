@@ -12,8 +12,8 @@
 | Cutover Frequency| 10kHz | 3.1kHz |
 | Phase at crossover | ~115° | 78° |
 | Phase Margin | ~65° | ~102°|
-| Line Regulation | N/A | 9.25 mV/V (0.74% over a 40% Vin swing) |
-| Load Regulation | N/A | 0.74% over a 2× load step (Zout ≈ 74 mΩ)|
+| Line Regulation | N/A | ~9 mV/V (~0.7% over a 40% Vin swing) |
+| Load Regulation | N/A | ~0.7% over a 2× load step (Zout ≈ 74 mΩ)|
 | Efficiency at 0.5A | N/A | ~87% |
 | SW node overshoot | N/A | 3% (~12.4 V peak) — no snubber required |
 
