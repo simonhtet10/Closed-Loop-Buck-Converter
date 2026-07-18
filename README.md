@@ -62,12 +62,15 @@ With this circuit topology, reaching 100kHz would require a dedicated fast compa
 
 ### Notable Bugs
 **Inverting Schmitt trigger**
+
 The oscillator failed to start, with one stage latched at the rail and the other pinned to ground. The resistor arrangement produced and inverting Schmitt trigger which creates a  one-way latch- a falling triangle drives the square wave in the direction that pushes the triangle further down so the circuit never triggers its own rising transition. Rewiring the circuit to a non-inverting topology resolved this issue.
 
 **Missing compensator zero** 
+
 After closing the loop, the output was limit cyclced at 415mV p-p while the error amplifier swung across most of its range. One branch of the input network was removed when doing the Middlebrook injection , which collapsed the Type III to a Type II compensator, which reduced the phase margin by 45 to 90°. Installing the branch reduced the error amplifier's activity by 22x and removed the osicllation.
 
 **Two extended debugging sessions turned out to be instrumentation and not the circuit**
+
 A bench supply current limit set too low starved the rail and produced several misleading symptoms across the gate driver and power stage - including an apparently latched MOSFET that tested perfectly healthy independently. Separately, saturated network analyzer inputs returned an identical meaningless trace across four different injection circuit configurations until the DC offset was nulled. Both are documented in blank as distinguishing measurement issues from circuit behavior is a substantial amount of the work.
 
 ### Repo Contents
