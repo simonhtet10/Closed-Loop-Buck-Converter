@@ -1,0 +1,34 @@
+Ref,Component,Value,Package,Manufacturer Part,Qty,Notes
+U1,Quad op-amp,TLC2274,DIP-14,TLC2274CN,1,Sections A+D oscillator; C error amp; rail-to-rail input needed on single 12V supply
+U2,Comparator,LM393,DIP-8,LM393AP,1,PWM comparator; open-collector output
+U3,Gate driver,IR2104,DIP-8,IR2104PBF,1,High-side bootstrap driver; single PWM input; VIH = 3V
+U4,Voltage reference,TL431,TO-92,TL431,1,2.495V shunt reference; Ref tied to Cathode
+Q1,MOSFET,IRLZ44N,TO-220,IRLZ44NPBF,1,Logic-level N-channel; 55V 47A; low gate charge
+D1,Schottky diode,1N5819,DO-41,1N5819,1,Freewheel diode; 40V 1A; substituted for 1N5821 (DO-201 leads too thick for breadboard)
+D2,Fast diode,1N4148,DO-35,1N4148,1,"Bootstrap diode; anode to 12V rail, cathode to VB"
+L1,Inductor,100uH,Radial,RL-5480HC-4-100,1,2.45A rating; 33 mOhm DCR
+Cin,Input bulk cap,470uF,Radial electrolytic,25YXJ470M10X12.5,1,25V; input decoupling at MOSFET drain
+Cout,Output cap,100uF,Radial electrolytic,16SEPC100M,1,16V; 29 mOhm ESR max (sets ESR zero at 66.3kHz)
+Cboot,Bootstrap cap,1uF,Radial ceramic,FK20X7R1H105KN000,1,Between VB and VS
+Cbypass,Bypass cap,100nF,Radial ceramic,K104K10X7RF5UH5,6,One per IC across supply pins; mid-rail bias bypass
+R1,Compensator Zi upper,10k,Axial 1%,,1,Feedback divider upper; sets gain and Vout
+R2,Compensator Zf series,5.1k,Axial 1%,,1,Built as 4.7k + 470 ohm series (5.17k); sets fz2/fp2
+R3,Compensator Zi series,330Ω,Axial 1%,,1,Sets fz1/fp1 with C2
+R4,Feedback divider lower,10k,Axial 1%,,1,Sets Vout = 2.5 x (1 + R1/R4) = 5.0V
+C1,Compensator Zf integrator,39nF,Film,B32529C0393J289,1,Sets fp0/fz2
+C2,Compensator Zi feedforward,10nF,Ceramic C0G,FG28C0G1H103JNT00,1,Sets fz1/fp1 with R3
+C3,Compensator Zf HF bypass,470pF,Ceramic C0G,FG28C0G1H471JNT00,1,Sets fp2
+Ra,Schmitt feedback,82kΩ,Axial 1%,,1,Built as 47k + 33k series (80k); non-inverting hysteresis
+Rsch_top,Schmitt threshold,47kΩ,Axial 1%,,1,From 12V rail to Schmitt IN+
+Rsch_bot,Schmitt threshold,33kΩ,Axial 1%,,1,From GND to Schmitt IN+
+Rint,Integrator input,10kΩ,Axial 1%,,1,Retuned from 22k design value; sets ~71.6kHz given slew-limited swing
+Cint,Integrator feedback,1nF,Ceramic C0G,,1,Built as 2 x 470pF parallel (940pF)
+Rmid1,Integrator mid-rail bias,100kΩ,Axial 1%,,1,From 12V to integrator IN+
+Rmid2,Integrator mid-rail bias,100kΩ,Axial 1%,,1,From GND to integrator IN+; bypassed 100nF
+Rin_p,LM393 input protection,1k,Axial 1%,,1,Series into IN+
+Rin_n,LM393 input protection,1kΩ,Axial 1%,,1,Series into IN- (triangle)
+Rpull,LM393 pull-up,2.2kΩ,Axial 1%,,1,Open-collector pull-up to 12V
+Rhys,LM393 hysteresis,820kΩ,Axial 1%,,1,Built as 680k + 100k series (780k)
+Rgate,Gate resistor,20Ω,Axial,,1,Between IR2104 HO and MOSFET gate; damps switching-edge ringing
+Rload,Dummy load,10Ω / 10W,Aluminum wirewound,,1,~0.5A test load; parallel a second for 1A step
+Rinj,Middlebrook injection,100Ω,Axial,,1,Series in feedback path for loop-gain measurement only
