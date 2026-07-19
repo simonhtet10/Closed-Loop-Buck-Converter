@@ -99,7 +99,7 @@ Measured thresholds: **1.91 V / 3.11 V**.
 Bypass cap across V+ (pin 8) and GND (pin 4).
 
 - **IN− (pin 2):** Rin− (1 kΩ) from the triangle (Section D output)
-- **IN+ (pin 3):** Rin+ (1 kΩ) from the Vref node *(temporary — moves to Ve in Phase 6)*; Rhys (820 kΩ, built as 680 k + 100 k) from OUT back to IN+
+- **IN+ (pin 3):** Rin+ (1 kΩ) from the Vref node *(temporary — moves to Ve in Phase 6)*; Rhys (680kΩ) from OUT back to IN+
 - **OUT (pin 1):** Rpull (2.2 kΩ) to 12 V (open-collector pull-up); this is the probe point
 
 **Test:** Scope on OUT. Expect a clean ~71.6 kHz square wave.
@@ -231,6 +231,6 @@ Measured on this build: **fc ≈ 3.1 kHz, PM ≈ 102°.** Validated by (a) re-ru
 | Rint 22 kΩ | 10 kΩ | Retuned empirically for ~71.6 kHz given the slew-limited swing |
 | R2 5.1 kΩ | 4.7 kΩ + 470 Ω (5.17 kΩ) | Series combination from the 1 % kit |
 | Ra 82 kΩ | 47 kΩ + 33 kΩ (80 kΩ) | Series combination |
-| Rhys 820 kΩ | 680 kΩ + 100 kΩ (780 kΩ) | Series combination |
+| Rhys 820 kΩ | 680 kΩ  | Adjusted during Phase 3 debugging |
 | TL431 bias 10 kΩ | 4.7 kΩ | 0.95 mA → 2.0 mA, safe margin above dropout |
 | Schmitt (inverting) | 3-resistor non-inverting | Original arrangement latched and wouldn't oscillate |
