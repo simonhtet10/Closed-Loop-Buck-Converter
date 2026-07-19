@@ -27,15 +27,15 @@ Rather than digital, an analog implementation was chosen because the compensator
 
 The compensator places its first zero at the LC double pole to cancel it, a second zero at 800 Hz (half the crossover frequency) for additional phase boost below crossover, one pole at 50 kHz to roll off ahead of the switching frequency, and a second pole at the ESR zero to cancel it.
 
-The components are not independently solvable.R1·C1 had to be back-solved from the loop gain requirement than taken from the standard equation in TI's app notes, which is circular. Solved instead from the constraint that the compensator must supply at least 1/[plant(fc)] at the crossover frequency gives us R1·C1 directly. Full derivations are stored in docs/design-notes.md.
+The components are not independently solvable.R1·C1 had to be back-solved from the loop gain requirement than taken from the standard equation in TI's app notes, which is a circular set of equations. Solved instead from the fact that the compensator needs to supply at least 1/[plant(fc)] at the crossover frequency gives us R1·C1 directly. Full derivations are stored in docs/design-notes.md.
 
 ### Measurement Methodology
 
 Loop gain was measured by a Middlebrook voltage injection - a 100Ω resistor inserted in series between the output node and the compesnator's input network, with the AD2's waveform generator injecting a small AC disturbance through a DC blocking capacitor. The Network Analyzer sweeps thsi injection and computes the ratio of the two probe channels, yielding gain and phase versus frequency directly.
 
-Middlebrook injection requires the impedance looking backward from the injection point to be much smaller than the impedance looking forward. The output impedance can be derived from the load regulation measurement, is approximately 74mΩ, while the forward impedance into the compensator is approximately 10kΩ. The 100Ω injection sits between them, being 1350 times larger and 100 times smaller respectively. 100Ω in series with 10kΩ introduces a 1% shift in the feedback divider's upper leg, which has a calculated effect of 25mV on the DC operating point. 
+Middlebrook injection requires the impedance looking backward from the injection point to be much smaller than the impedance looking forward. The output impedance can be derived from the load regulation measurement, is approximately 74mΩ, while the forward impedance into the compensator is approximately 10kΩ. The 100Ω injection sits between them, being approximately 1350 times larger and 100 times smaller respectively. 100Ω in series with 10kΩ introduces a 1% shift in the feedback divider's upper leg, which has a calculated effect of 25mV on the DC operating point. 
 
-The measurement's linearity was verified by repeating the Bode sweep at half amplitude. Phase at crossover frequency matched to within 0.5° between the two truns, confirming that the loop was not being driven into duty-cycle clipping.
+The measurement's linearity was verified by repeating the Bode sweep at half the amplitude. Phase at crossover frequency matched to within 0.5° between the two truns, confirming that the loop was not being driven into duty-cycle clipping.
 
 One thing worth noting for reproducing this measurement: both compensator input branches must be moved to the injection node. Leaving either branch fed directly from the output never breaks the loop and the measurement returns unity gain with zero phase shift.
 
@@ -49,7 +49,7 @@ The large phase margin is caused by th elow crossover. At 3.1kHz the loop crosse
 ### Oscillator's Frequency Limit
 The oscillator was designed for 100kHz bu settles at ~71.6kHz with a hysteresis band nearly three times wider than intended. This was caused by the op-amp's slew rate: swinging the full supply rail takes ~3.3µs agianst a target period of 10µs, so the comparator spends a large fraction of every half-cycle mid transition. The integrator continues ramping past the ideal threshold before the transition fully registers, widening the hysteresis band.
 
-Tuning the integrator's resistor produced diminishing returns
+Tuning the integrator's resistor lower produced diminishing returns
 | R_int| Hysteresis Span | Frequency | Waveform |
 | --- | --- | --- | --- |
 | 33kΩ | 2.2V | 40kHz | Clean triangle|
@@ -79,7 +79,7 @@ docs/design-notes
 docs/build-guide
 docs/bringup-log
 measurement/
-simulation/
+images/
 hardware/
 
 
