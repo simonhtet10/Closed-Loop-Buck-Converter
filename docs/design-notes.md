@@ -15,7 +15,7 @@ Complete design derivation for the 12 V → 5 V voltage-mode buck converter. Thi
 | Output ripple target | ≤ 50 mV |
 | Control | Voltage-mode, analog Type III compensator |
 
-The converter is a step-down switcher: it switches the input on and off at high frequency and filters the result to a lower average output. The loop gain is
+The converter is a step-down switcher: it switches the input on and off at high frequency and filters the result to a lower average output. The open-loop gain is
 
 $$T(s) = G_c(s)\, G_{vd}(s)\, H(s)$$
 
