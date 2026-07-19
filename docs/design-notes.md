@@ -17,7 +17,7 @@ Complete design derivation for the 12 V → 5 V voltage-mode buck converter. Thi
 
 The converter is a step-down switcher: it switches the input on and off at high frequency and filters the result to a lower average output. The open-loop gain is
 
-$$T(s) = G_c(s)  G_{vd}(s) H(s)$$
+$$T(s) = G_c(s)·G_{vd}(s)·H(s)$$
 
 where G_c is the compensator, G_vd the plant (control-to-output), and H the feedback sensor gain.
 
@@ -31,7 +31,7 @@ Duty cycle: D = Vout / Vin = 5/12 ≈ 0.417.
 
 Inductor value from the allowed ripple current (standard target is 20–40% of I_max):
 
-$$L = \frac{(V_{in}-V_{out})\,D}{\Delta I_L \, f_{sw}} = \frac{7 \times 0.417}{0.3 \times 10^5} \approx 100\ \mu H$$
+$$L = \frac{(V_{in}-V_{out})\,D}{\Delta I_L · f_{sw}} = \frac{7 \times 0.417}{0.3 \times 10^5} \approx 100\ \mu H$$
 
 Selected: **RL-5480HC-4-100** (100 µH, 2.45 A, 33 mΩ DCR).
 
