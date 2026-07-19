@@ -75,11 +75,15 @@ A bench supply current limit set too low starved the rail and produced several m
 
 ### Repo Contents
 
-[Click here](docs/design-notes.md)
-[Click here](docs/Buck_Converter_Build_Guide.md)
-[Click here](measurements/)
-[Click here](images/)
-[Click here](hardware/)
+[Design notes](docs/design-notes.md)
+
+[Build Guide](docs/Buck_Converter_Build_Guide.md)
+
+[Measurements](measurements/)
+
+[Images](images/)
+
+[Hardware](hardware/)
 
 
 
