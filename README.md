@@ -27,7 +27,8 @@ Rather than digital, an analog implementation was chosen because the compensator
 
 The compensator places its first zero at the LC double pole to cancel it, a second zero at 800 Hz (half the crossover frequency) for additional phase boost below crossover, one pole at 50 kHz to roll off ahead of the switching frequency, and a second pole at the ESR zero to cancel it.
 
-The components are not independently solvable.R1·C1 had to be back-solved from the loop gain requirement than taken from the standard equation in TI's app notes, which is a circular set of equations. Solved instead from the fact that the compensator needs to supply at least 1/[plant(fc)] at the crossover frequency gives us R1·C1 directly. Full derivations are stored in docs/design-notes.md.
+The components are not independently solvable. The R1·C1 product can't be taken straight from the standard equation in TI's app notes — that path is circular, since the equation depends on values it's meant to produce.
+I back-solved it from the loop gain requirement instead. At crossover, the compensator must supply at least 1/|plant(f_c)|. That condition fixes R1·C1 directly. Full derivations are in the [design notes](docs/design-notes.md)
 
 ### Measurement Methodology
 
