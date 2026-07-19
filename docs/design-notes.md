@@ -17,7 +17,7 @@ Complete design derivation for the 12 V → 5 V voltage-mode buck converter. Thi
 
 The converter is a step-down switcher: it switches the input on and off at high frequency and filters the result to a lower average output. The open-loop gain is
 
-$$T(s) = G_c(s)\, G_{vd}(s)\, H(s)$$
+$$T(s) = G_c(s)  G_{vd}(s) H(s)$$
 
 where G_c is the compensator, G_vd the plant (control-to-output), and H the feedback sensor gain.
 
