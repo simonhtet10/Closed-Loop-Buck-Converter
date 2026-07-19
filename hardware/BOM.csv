@@ -28,7 +28,7 @@ Rmid2,Integrator mid-rail bias,100kΩ,Axial 1%,,1,From GND to integrator IN+; by
 Rin_p,LM393 input protection,1k,Axial 1%,,1,Series into IN+
 Rin_n,LM393 input protection,1kΩ,Axial 1%,,1,Series into IN- (triangle)
 Rpull,LM393 pull-up,2.2kΩ,Axial 1%,,1,Open-collector pull-up to 12V
-Rhys,LM393 hysteresis,820kΩ,Axial 1%,,1,Built as 680k + 100k series (780k)
+Rhys,LM393 hysteresis,680kΩ,Axial 1%,,1, Adjusted from 820kΩ during debugging
 Rgate,Gate resistor,20Ω,Axial,,1,Between IR2104 HO and MOSFET gate; damps switching-edge ringing
 Rload,Dummy load,10Ω / 10W,Aluminum wirewound,,1,~0.5A test load; parallel a second for 1A step
 Rinj,Middlebrook injection,100Ω,Axial,,1,Series in feedback path for loop-gain measurement only
