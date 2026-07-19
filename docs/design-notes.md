@@ -39,13 +39,13 @@ Selected: **RL-5480HC-4-100** (100 µH, 2.45 A, 33 mΩ DCR).
 
 For a switching regulator the ripple is dominated by the capacitor's ESR:
 
-$$V_{ripple} \approx \Delta I_L \times R_{ESR}, \qquad V_{ripple} = \frac{\Delta I_L}{8 f_{sw} C}$$
+$$V_{ripple} \approx \Delta I_L \times R_{ESR}, \qquad V_{ripple} = \frac{\Delta I_L}{8·f_{sw}·C}$$
 
 Requiring V_ripple ≤ 50 mV sets both a capacitance floor and an ESR ceiling:
 
 $$C \ge 7.5\ \mu F \;(\text{use } 100\ \mu F), \qquad R_{ESR} \le \frac{50\text{ mV}}{0.3\text{ A}} \approx 167\ m\Omega$$
 
-Selected: **Panasonic 16SEPC100M** (100 µF, 29 mΩ ESR max — comfortably under the 167 mΩ ceiling).
+Selected: **Panasonic 16SEPC100M** (100 µF, 24 mΩ ESR max — comfortably under the 167 mΩ ceiling).
 
 ---
 
@@ -90,7 +90,7 @@ Standard Type III placement for this plant:
 
 ---
 
-## 6. Component Values (TI SLVA662 Type III procedure)
+## 6. Component Values (Using Texas Instrumental's SLVA662 Type III Compensator procedure)
 
 Op-amp Type III topology: input network Zi = R1 ∥ (R3 + C2), feedback network Zf = (R2 + C1) ∥ C3, with Vref on the non-inverting input.
 
