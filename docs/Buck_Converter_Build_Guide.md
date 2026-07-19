@@ -182,7 +182,7 @@ Section C = pins 8/9/10.
 
 **Line regulation:** VOUT via Voltmeter at 10 / 12 / 14 V in, 0.5 A load. Keep Vin > ~7 V or duty saturates.
 
-**Load regulation:** VOUT at 0.5 A and 1.0 A (parallel a second 10 Ω), 12 V in. Raise the current limit to 1.5 A first.
+**Load regulation:** VOUT at 0.5 A and 1.0 A (parallel a second 10 Ω), 12 V in. Raise the current limit to 1.5 A first as current draw increases.
 
 **Ripple:** scope VOUT with a *short* ground lead right at the output cap. Long ground loops read switching spikes that aren't really on the rail.
 
@@ -190,7 +190,7 @@ Section C = pins 8/9/10.
 
 Measured on this build: line reg ≈ 9 mV/V (~0.7 %), load reg ≈ 0.7 % (Zout ≈ 74 mΩ), efficiency ≈ 87 % @ 0.5 A.
 
-> **Gotcha:** the load resistor runs at 80–120 °C surface temp by design — don't grab it, and keep it off the breadboard plastic and wire insulation.
+> **Gotcha:** the load resistor runs at 80–120 °C surface temp by design — DO NOT grab it (learnt by experience), and keep it off the breadboard plastic and wire insulation.
 
 ---
 
