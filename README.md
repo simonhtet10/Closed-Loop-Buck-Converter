@@ -9,7 +9,7 @@
 | Parameter| Designed Specification | Measured Value |
 | --- | --- | --- |
 | Switching Frequency | 100kHz | 71.6kHz |
-| Cutover Frequency| 10kHz | 3.1kHz |
+| Crosstover Frequency| 10kHz | 3.1kHz |
 | Phase at crossover | ~115° | 78° |
 | Phase Margin | ~65° | ~102°|
 | Line Regulation | N/A | ~9 mV/V (~0.7% over a 40% Vin swing) |
@@ -23,7 +23,7 @@ Measurement was validated two ways: repeating the sweep at 2× injection amplitu
 
 The plant was a standard LC buck filter -a 100µH inductor with 29mΩ ESR and 100µF capacitor- giving an LC double pole at 1592Hz and a ESR zero at 66.3kHz. The LC double pole contributes up to 180° of phase lag through resonance, more than a single-zero Type II compensator can recover.The Type III's dual-zero structure provides the phase boost needed to cross over with adequate phase margin. 
 
-Rather than digital, an analog implementation was chosen because the compensator's poles and zeroes and physicla components rather than firmware coefficients- the transfer funciton can be probed directly and compared against its design, which is the deliverable of the project. 
+Rather than digital, an analog implementation was chosen because the compensator's poles and zeroes and physical components rather than firmware coefficients- the transfer funciton can be probed directly and compared against its design, which is the deliverable of the project. 
 
 The compensator places its first zero at the LC double pole to cancel it, a second zero at 800 Hz (half the crossover frequency) for additional phase boost below crossover, one pole at 50 kHz to roll off ahead of the switching frequency, and a second pole at the ESR zero to cancel it.
 
@@ -32,11 +32,11 @@ I back-solved it from the loop gain requirement instead. At crossover, the compe
 
 ### Measurement Methodology
 
-Loop gain was measured by a Middlebrook voltage injection - a 100Ω resistor inserted in series between the output node and the compesnator's input network, with the AD2's waveform generator injecting a small AC disturbance through a DC blocking capacitor. The Network Analyzer sweeps thsi injection and computes the ratio of the two probe channels, yielding gain and phase versus frequency directly.
+Loop gain was measured by a Middlebrook voltage injection - a 100Ω resistor inserted in series between the output node and the compensator's input network, with the AD2's waveform generator injecting a small AC disturbance through a DC blocking capacitor. The Network Analyzer sweeps thsi injection and computes the ratio of the two probe channels, yielding gain and phase versus frequency directly.
 
 Middlebrook injection requires the impedance looking backward from the injection point to be much smaller than the impedance looking forward. The output impedance can be derived from the load regulation measurement, is approximately 74mΩ, while the forward impedance into the compensator is approximately 10kΩ. The 100Ω injection sits between them, being approximately 1350 times larger and 100 times smaller respectively. 100Ω in series with 10kΩ introduces a 1% shift in the feedback divider's upper leg, which has a calculated effect of 25mV on the DC operating point. 
 
-The measurement's linearity was verified by repeating the Bode sweep at half the amplitude. Phase at crossover frequency matched to within 0.5° between the two truns, confirming that the loop was not being driven into duty-cycle clipping.
+The measurement's linearity was verified by repeating the Bode sweep at half the amplitude. Phase at crossover frequency matched to within 0.5° between the two turns, confirming that the loop was not being driven into duty-cycle clipping.
 
 One thing worth noting for reproducing this measurement: both compensator input branches must be moved to the injection node. Leaving either branch fed directly from the output never breaks the loop and the measurement returns unity gain with zero phase shift.
 
@@ -48,7 +48,7 @@ The crossover landed at roughly a third of the target frequency. About half of t
 The large phase margin is caused by th elow crossover. At 3.1kHz the loop crosses below the region where the LC double poles contributes significant phase lag, while both compensator zeros have already delivered most of their phase boost. Crossing in the compensator's maximum-boost region naturally produces a large margin. This means the loop is unconditionally stable but heavily overdamped with a slower transient recovery than the 65° target, which was chosen to balance the two.
 
 ### Oscillator's Frequency Limit
-The oscillator was designed for 100kHz bu settles at ~71.6kHz with a hysteresis band nearly three times wider than intended. This was caused by the op-amp's slew rate: swinging the full supply rail takes ~3.3µs agianst a target period of 10µs, so the comparator spends a large fraction of every half-cycle mid transition. The integrator continues ramping past the ideal threshold before the transition fully registers, widening the hysteresis band.
+The oscillator was designed for 100kHz bu settles at ~71.6kHz with a hysteresis band nearly three times wider than intended. This was caused by the op-amp's slew rate: swinging the full supply rail takes ~3.3µs against a target period of 10µs, so the comparator spends a large fraction of every half-cycle mid transition. The integrator continues ramping past the ideal threshold before the transition fully registers, widening the hysteresis band.
 
 Tuning the integrator's resistor lower produced diminishing returns
 | R_int| Hysteresis Span | Frequency | Waveform |
@@ -57,9 +57,9 @@ Tuning the integrator's resistor lower produced diminishing returns
 | 10kΩ | 3.5V | 71kHz | Straight edges,rounded peaks- chose this  |
 | 4.7kΩ | 5.7V | 87kHZ | Fully sinusoidal |
 
-Each halving of R_int bought progressively less frequency while the hysteris span kept growing faster and past a point, the triangle degraded into a sinusoid. With a linear ramp the mapping of the error output to the duty cycle is proportional- a the error voltage is halfway up the ramp gives 50% duty cycle, moving the error voltage by 10% moves the duty cycle by 10%. A rounded ramp breaks that so the aggressive tuning points were rejected despite yielding a frequency closer to target. The selected value keeps rounding confined to the peaks so the converter's nominal operating point sits on the linear section of the ramp.
+Each halving of R_int bought progressively less frequency while the hysteresis span kept growing faster and past a point, the triangle degraded into a sinusoid. With a linear ramp the mapping of the error output to the duty cycle is proportional- a the error voltage is halfway up the ramp gives 50% duty cycle, moving the error voltage by 10% moves the duty cycle by 10%. A rounded ramp breaks that so the aggressive tuning points were rejected despite yielding a frequency closer to target. The selected value keeps rounding confined to the peaks so the converter's nominal operating point sits on the linear section of the ramp.
 
-With this circuit topology, reaching 100kHz would require a dedicated fast comparator rather than a general op-amp, which is a compoentn-level limit.
+With this circuit topology, reaching 100kHz would require a dedicated fast comparator rather than a general op-amp, which is a component-level limit.
 
 ### Notable Bugs
 **Inverting Schmitt trigger**
@@ -68,11 +68,11 @@ The oscillator failed to start, with one stage latched at the rail and the other
 
 **Missing compensator zero** 
 
-After closing the loop, the output was limit cyclced at 415mV p-p while the error amplifier swung across most of its range. One branch of the input network was removed when doing the Middlebrook injection , which collapsed the Type III to a Type II compensator, which reduced the phase margin by 45 to 90°. Installing the branch reduced the error amplifier's activity by 22x and removed the osicllation.
+After closing the loop, the output was limit cyclced at 415mV p-p while the error amplifier swung across most of its range. One branch of the input network was removed when doing the Middlebrook injection , which collapsed the Type III to a Type II compensator, which reduced the phase margin by 45 to 90°. Installing the branch reduced the error amplifier's activity by 22x and removed the oscillation.
 
 **Two extended debugging sessions turned out to be instrumentation and not the circuit**
 
-A bench supply current limit set too low starved the rail and produced several misleading symptoms across the gate driver and power stage - including an apparently latched MOSFET that tested perfectly healthy independently. Separately, saturated network analyzer inputs returned an identical meaningless trace across four different injection circuit configurations until the DC offset was nulled. Both are documented in blank as distinguishing measurement issues from circuit behavior is a substantial amount of the work.
+A bench supply current limit set too low starved the rail and produced several misleading symptoms across the gate driver and power stage - including an apparently latched MOSFET that tested perfectly healthy independently. Separately, saturated network analyzer inputs returned an identical meaningless trace across four different injection circuit configurations until the DC offset was nulled. Both are documented in the [build guide](docs/Buck_Converter_Build_Guide.md) as distinguishing measurement issues from circuit behavior is a substantial amount of the work.
 
 ### Repo Contents
 
